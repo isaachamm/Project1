@@ -28,7 +28,18 @@ def fermat(N,k):
     # To generate random values for a, you will most likley want to use
     # random.randint(low,hi) which gives a random integer between low and
     #  hi, inclusive.
-	return 'prime'
+
+    prime = True
+    for i in range(k):
+        a = random.randint(1, N)
+        if (a**(N - 1) % N) != 1:
+            prime = False
+            break
+
+    if prime:
+    	return 'prime'
+    else:
+        return 'composite'
 
 
 def miller_rabin(N,k):
