@@ -45,8 +45,16 @@ def fermat(N,k):
     #  hi, inclusive.
 
     prime = True
+    numbers_tried = {0}
+
     for i in range(k):
         a = random.randint(1, N - 1)
+
+
+        # This is to ensure that we get unique numbers for each iteration
+        while a in numbers_tried:
+            a = random.randint(1, N - 1)
+
         if (mod_exp(a, N - 1, N)) != 1:
             prime = False
             break
@@ -66,9 +74,16 @@ def miller_rabin(N,k):
     #  hi, inclusive.
 
     prime = True
+
+    numbers_tried = {0}
+
     for i in range(k):
         exponent = N - 1
         a = random.randint(1, exponent)
+
+        # This is to ensure that we get unique numbers for each iteration
+        while a in numbers_tried:
+            a = random.randint(1, exponent)
 
         if (exponent % 2) != 0:
             prime = False
@@ -93,4 +108,5 @@ def miller_rabin(N,k):
     else:
         return 'composite'
 
-    # TODO USE 6601 to break it
+    # TODO USE 6601, 8911 to break it
+#     Lower numbers are more likely to break it as well
